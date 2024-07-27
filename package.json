@@ -1,8 +1,14 @@
 {
   "name": "pycurlybraces",
-  "displayName": "pycurlybraces",
+  "displayName": "Pycurlybraces",
   "description": "Curly braces in Python",
+  "publisher": "BrayanCeron",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brayanceron/pycurlybraces"
+  },
+  "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.91.0"
   },
@@ -14,10 +20,57 @@
   "contributes": {
     "commands": [
       {
-        "command": "pycurlybraces.helloWorld",
-        "title": "Hello World"
+        "command": "pycurlybraces.onRendering",
+        "title": "onRendering"
+      },
+      {
+        "command": "pycurlybraces.offRendering",
+        "title": "offRendering"
+      },
+      {
+        "command": "pycurlybraces.showColon",
+        "title": "showColon"
+      },
+      {
+        "command": "pycurlybraces.hideColon",
+        "title": "hideColon"
+      },
+      {
+        "command": "pycurlybraces.enableBehaviors",
+        "title": "enableBehaviors"
+      },
+      {
+        "command": "pycurlybraces.disableBehaviors",
+        "title": "disableBehaviors"
+      },
+      {
+        "command": "pycurlybraces.enableOnCursorOver",
+        "title": "enableOnCursorOver"
+      },
+      {
+        "command": "pycurlybraces.disableOnCursorOver",
+        "title": "disableOnCursorOver"
       }
-    ]
+    ],
+    "snippets": [
+      {
+        "language": "python",
+        "path": "./snip.code-snippets"
+      }
+    ],
+    "languages": [
+      {
+        "id": "python",
+        "extensions": [
+          ".py"
+        ],
+        "aliases": [
+          "Python"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": []
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

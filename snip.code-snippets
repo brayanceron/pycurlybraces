@@ -1,0 +1,265 @@
+{
+    "pycurlybraces":{
+        "prefix": ["_#{","py#{","*py",],
+        "body": [
+            "#{",
+            "\t${1:pass}",
+            "#} ",
+            "$0"
+        ],
+        "description": "Generates an indentation structure without colon"
+    },
+    "pycurlybracesColon":{
+        "prefix": ["_:#{","py:#{"],
+        "body": [
+            ":#{",
+            "\t${1:pass}",
+            "#} ",
+            "$0"
+        ],
+        "description": "generates an indentation structure with colon"
+    },
+
+
+    "hwpy":{
+        "prefix": "hwpy",
+        "body": [
+            "print(\"${1:Hello World}\")",
+        ],
+        "description": "Print 'hello world' in python"
+    },
+
+
+    "if()py":{
+        "prefix": "if(){...}",
+        "body": [
+            "if (${1:True}) :#{",
+            "\t${2:pass}",
+            "#}",
+            "$0"
+        ],
+        "description": "Generates an if structure with parentheses"
+    },
+    "ifpy":{
+        "prefix": "if{...}",
+        "body": [
+            "if ${1:True} :#{",
+            "\t${2:pass}",
+            "#}",
+            "$0"
+        ],
+        "description": "Generates an if structure without parentheses"
+    },
+    "elif()py":{
+        "prefix": "elif(){...}",
+        "body": [
+            "elif (${1:True}) :#{",
+            "\t${2:pass}",
+            "#}",
+            "$0"
+        ],
+        "description": "Generates an elif structure with parentheses"
+    },
+    "elifpy":{
+        "prefix": "elif{...}",
+        "body": [
+            "elif ${1:True} :#{",
+            "\t${2:pass}",
+            "#}",
+            "$0"
+        ],
+        "description": "Generates an elif structure without parentheses"
+    },
+    "elsepy":{
+        "prefix": "else{...}",
+        "body": [
+            "else :#{",
+            "\t${1:pass}",
+            "#}",
+            "$0"
+        ],
+        "description": "Generates an else structure"
+    },
+    "ifelse":{
+        // "prefix": "if()...else",
+        "prefix": "if(){...}else{...}",
+        "body": [
+            "if (${1:True}) :#{",
+            "\t${2:pass}",
+            "#}",
+            "else :#{",
+            "\t${3:pass}",
+            "#}",
+            "$0"
+        ],
+        "description": "Generates an if structure with its respective else structure."
+    },
+
+    
+    "while()py":{
+        "prefix": "while(){...}",
+        "body": [
+            "while (${1:True}) :#{",
+            "\t${2:pass}",
+            "#}",
+            "$0"
+        ],
+        "description": "Generates a while structure with parentheses."
+    },
+    "whilepy":{
+        "prefix": "while{...}",
+        "body": [
+            "while ${1:True} :#{",
+            "\t${2:pass}",
+            "#}",
+            "$0"
+        ],
+        "description": "Generates a while structure without parentheses."
+    },
+
+
+    "foriterablepy":{
+        "prefix": "for i in iterable",
+        "body": [
+            "for ${1:i} in ${2:iterable} :#{",
+            "\t${3:pass}",
+            "#}",
+            "$0"
+        ],
+        "description": "Generates a for structure(iterable)."
+    },
+    "forrangepy":{
+        "prefix": "for i in range",
+        "body": [
+            "for ${1:i} in range(${2:number}) :#{",
+            "\t${3:pass}",
+            "#}",
+            "$0"
+        ],
+        "description": "Generates a for structure(range)."
+    },
+
+
+    "defpy":{
+        "prefix": "def(){...}",
+        "body": [
+            "def ${1:function}(${2:params}) :#{",
+            "\t${3:pass}",
+            "#}",
+            "$0"
+        ],
+        "description": "Generates a def structure."
+    },
+
+    
+    "class()py":{
+        "prefix": "class(){...}",
+        "body": [
+            "class ${1:name}(${2:object}) :#{",
+            "\t${3:pass}",
+            "#}",
+            "$0"
+        ],
+        "description": "Generates a class structure with inheritance."
+    },
+    "classpy":{
+        "prefix": "class{...}",
+        "body": [
+            "class ${1:name} :#{",
+            "\t${2:pass}",
+            "#}",
+            "$0"
+        ],
+        "description": "Generates a class structure without inheritance."
+    },
+
+
+    "trypy":{
+        "prefix": "try{...}except{...}",
+        "body": [
+            "try :#{",
+            "\t${1:pass}",
+            "#}",
+            "except :#{",
+            "\t${2:pass}",
+            "#}",
+            "$0"
+        ],
+        "description": "Generates a try except structure."
+    },
+    "finallypy":{
+        "prefix": "finally{...}",
+        "body": [
+            "finally :#{",
+            "\t${1:pass}",
+            "#}",
+            "$0"
+        ],
+        "description": "Generates a finally structure."
+    },
+
+
+    "match()py":{
+        "prefix": "match(){...}",
+        "body": [
+            "match (${1:expression}) :#{",
+            "\t${2:pass}",
+            "#}",
+            "$0"
+        ],
+        "description": "Generates a match except structure with parentheses."
+    },
+    "matchpy":{
+        "prefix": "match{...}",
+        "body": [
+            "match ${1:expression} :#{",
+            "\t${2:pass}",
+            "#}",
+            "$0"
+        ],
+        "description": "Generates a match except structure without parentheses."
+    },
+    "case()py":{
+        "prefix": "case(){...}",
+        "body": [
+            "case (${1:pattern}) :#{",
+            "\t${2:pass}",
+            "#}",
+            "$0"
+        ],
+        "description": "Generates a match except structure with parentheses."
+    },
+    "casepy":{
+        "prefix": "case{...}",
+        "body": [
+            "case ${1:pattern} :#{",
+            "\t${2:pass}",
+            "#}",
+            "$0"
+        ],
+        "description": "Generates a match except structure without parentheses."
+    },
+
+
+    "withpy":{
+        "prefix": "with{...}",
+        "body": [
+            "with ${1:expression} as ${2:manager} :#{",
+            "\t${3:pass}",
+            "#}",
+            "$0"
+        ],
+        "description": "Generates a 'with structure' with parentheses."
+    },
+    "with()py":{
+        "prefix": "with(){...}",
+        "body": [
+            "with (${1:expression} as ${2:manager}) :#{",
+            "\t${3:pass}",
+            "#}",
+            "$0"
+        ],
+        "description": "Generates a 'with structure' without parentheses."
+    },
+
+}
