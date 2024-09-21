@@ -11,8 +11,8 @@ This extension searches for the patterns: `#{`,`:#{`,`#}`, then hides them and p
 - The patterns `#{` and `:#{` VSCode will display them as `{` 
 - The pattern `#}` VSCode will display it as `}` 
 - You can see or not the "real text" when the cursor is over `{` and `}` (commands: enableOnCursorOver, disableOnCursorOver).
-- Snippets to autocomplete: if, elif, else, while, for, def, class, try, catch, finally and withy, and avoid making mistakes.
-- Built-in behaviors that allow autocompletion of the opening of: if, elif, else, while, for, def, class, try, catch, finally and with when the `{` key is pressed (commands: enableBehaviors, disableBehaviors).
+- Snippets to autocomplete: if, elif, else, while, for, def, class, try, catch, finally, match, case and withy, to avoid making mistakes.
+- Built-in behaviors that allow autocompletion of the opening of: if, elif, else, while, for, def, class, try, catch, finally, match, case and with when the `{` key is pressed (commands: enableBehaviors, disableBehaviors).
 - Escape characters: `\#{`, `\#}`
 
 

@@ -93,6 +93,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	// Event for when the content of the document changes.
 	const onDidChangeTextDocumentDisposable = vscode.workspace.onDidChangeTextDocument(async (event) => {
+		if (!editor || editor.document.languageId !== 'python') return;
 		const changes = event.contentChanges;
 		let parser: MicroParser;
 		let key: string = '';
