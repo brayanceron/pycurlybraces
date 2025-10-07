@@ -3,30 +3,25 @@ import { rgxIdentation, rgxPycurlybraces, rgxComment} from './regex'
 import { Action, AnalysisStatus, MicroParser } from './MicroParser'
 
 export async function activate(context: vscode.ExtensionContext) {
-	let fontStyle = vscode.window.createTextEditorDecorationType({
-		opacity: "0.01",// opacity: "0.25",
-		fontStyle: "normal"
-	});
 
 	function getRenderOptions(character: string, foregroundSize: number, isSingleLine: boolean = false) {
 		const foreground = (foregroundSize % 3) + 1;
+		const opacity = "0.01"// opacity: "0.25",
 		let options = {
 			contentText: character,
 			color: new vscode.ThemeColor(`editorBracketHighlight.foreground${foreground}`),// color:"red",			// backgroundColor: "yellow",
-			fontStyle: "normal",															// fontWeight:"bold",	
+			textDecoration: "normal", //  fontStyle: "normal",	
 			width: "0",
 			margin: "0"
 		}
 
 		if (isSingleLine) {
-			const renderOptions = { before: options }
-			return renderOptions;
+			return { opacity, before: options }
 		}
 		else {
 			options.margin = "0 -1em";
 			options.width = "2em"
-			const renderOptions = { after: options }
-			return renderOptions;
+			return { opacity, after: options }
 		}
 	}
 
@@ -37,14 +32,27 @@ export async function activate(context: vscode.ExtensionContext) {
 	let pycurlybraces: vscode.Range[] = [];
 	let isEditing = false;
 
+	const decorationCache = new Map<string, vscode.TextEditorDecorationType>();
+	function getOrCreateDecorationType(renderOptions: vscode.DecorationRenderOptions) {
+		const key = JSON.stringify(renderOptions);
+		if (!decorationCache.has(key)) {
+			const type = vscode.window.createTextEditorDecorationType(renderOptions);
+			decorationCache.set(key, type);
+		}
+		return decorationCache.get(key)!;
+	}
 	// function to update styles
 	function updateDecorations() {
 		if (!editor || editor.document.languageId !== 'python') return;
 		if (!onRendering) return;
-		let specificStringDecorations = [];
 		pycurlybraces = [];
 		const text = editor.document.getText();
 
+		 // Clear ranges/decorations //HACK this could be more efficient
+		for(const [_, dec] of decorationCache) { 
+			editor.setDecorations(dec, []); // dec.dispose() 
+		}
+		const decorationsByType = new Map<vscode.TextEditorDecorationType, vscode.DecorationOptions[]>();
 		let match;
 		while ((match = regexPycurlybraces.exec(text)) !== null) {
 			let char: string = "";
@@ -61,18 +69,22 @@ export async function activate(context: vscode.ExtensionContext) {
 
 			const isSingleLine = (startPos.line === endPos.line) ? true : false;
 
-			pycurlybraces.push(new vscode.Range(startPos, endPos));
+			const range = new  vscode.Range(startPos, endPos)
+			pycurlybraces.push(range);
 			if (onCursorOver) {
 				if (currentLinePycurlybraces === startPos.line || currentLinePycurlybraces === endPos.line) continue;
+				// if (range.contains(editor.selection.active)) continue;  // another option
 			}
 
-			specificStringDecorations.push({
-				range: new vscode.Range(startPos, endPos),
-				renderOptions: getRenderOptions(char, startTabs!, isSingleLine)
-			});
+			const renderOptions = getRenderOptions(char, startTabs!, isSingleLine);
+			const type = getOrCreateDecorationType(renderOptions);
+
+			const arr = decorationsByType.get(type) ?? [];
+			arr.push({ range });
+			decorationsByType.set(type, arr);
 		}
 
-		editor.setDecorations(fontStyle, specificStringDecorations);
+		for (const [type, ranges] of decorationsByType) { editor.setDecorations(type, ranges); } // Set ranges/decorations
 		console.log("UPDATE UP");
 	}
 
