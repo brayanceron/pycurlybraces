@@ -5,7 +5,7 @@ In short, Pycurlybraces is an extension that allows to simulate in some way the 
 ![demo](./images/demo.gif)
 
 ## Features
----
+
 This extension searches for the patterns: `#{`,`:#{`,`#}`, then hides them and puts the character corresponding to each pattern on them.
 
 - The patterns `#{` and `:#{` VSCode will display them as `{` 
@@ -20,7 +20,7 @@ The mentioned features can be disabled individually if you do not want to use th
 
 Recommendation: Please DO NOT use the patterns: `#{`,`:#{` and `#}` in strings and comments, and DO NOT write anything after them
 ## Installation
----
+
 1. Launch Visual Studio Code
 2. Go to Extensions
 3. Search for "Pycurlybraces"
